@@ -21,18 +21,22 @@ Before implementing:
 
 ## 2. Fix the core algorithm itself, don't just patch the symptoms.
 
+**Scope: applies to the code you are writing/authoring for the current task — not to pre-existing code you weren't asked to touch. See Section 3 for editing existing code.**
+
 - Do not aim for the bare minimum; strive for solutions that are comprehensive, logical, complete, and thoroughly polished.
 - Avoid hardcoding or relying on superficial, short-term fixes. Instead, aim to completely resolve the root cause using the most appropriate technologies and techniques.
 - Address the root algorithmic issue instead of just applying a superficial patch.
 - No abstractions for single-use code (unless otherwise requested, ask the user if necessary).
 - No error handling for impossible scenarios (unless otherwise requested, ask the user if necessary).
-- If you write 200 lines and it could be 50, rewrite it (Clean code with Perfect logic).
+- If you write 200 lines and it could be 50, rewrite it (Clean code with Perfect logic) — this applies to the new code you just wrote, not to unrelated existing code.
 
 Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify. Quality is our priority.
 
 ## 3. Surgical Changes
 
 **Touch only what you must. Clean up only your own mess.**
+
+**Scope: applies when editing/modifying pre-existing code. This takes precedence over Section 2's "rewrite if it could be shorter" — don't rewrite existing working code just to make it more concise.**
 
 When editing existing code:
 - Don't "improve" adjacent code, comments, or formatting (unless otherwise requested, ask the user if necessary).
@@ -47,7 +51,18 @@ When your changes create orphans:
 The test: Every changed line should trace directly to the user's request.
 
 ## 4. Rules:
-Backups (git commit / database backup / ...) are required before performing actions that could endanger user data, such as editing critical code, deleting files, deleting folders, resetting the database, changing data structures, etc. It is essential to ensure that all data can be restored in case of errors.
+- Backups (git commit / database backup / ...) are required before performing actions that could endanger user data. It is essential to ensure that all data can be restored in case of errors. Concretely:
+  - Before DB schema migrations or data resets → dump schema + data first.
+  - Before editing critical/shared config files → commit current state (git commit or copy) first.
+  - Before deleting files or folders → list them out and get explicit user confirmation first.
+  - Before large-scale refactors touching multiple files → ensure a clean git commit exists to roll back to.
+  - Security baseline: never hardcode secrets/API keys/credentials; validate and sanitize input before using it in queries, commands, or file paths.
+
+- When implementing or modifying a feature, use the file edit tool rather than rewriting the code from scratch. This ensures you are making changes in the correct location and avoids introducing new errors from a complete rewrite.
+
+- When choosing a solution, avoid approaches that are short-term, hardcoded, reliant on keyword matching, difficult to maintain, or unclear. Instead, prioritize solutions that are sustainable, well-integrated with other components in the project, easy to understand, and maintainable in the long run.
+
+- Thoroughly verify the integration between the code you just implemented and other parts of the project. Ensure that your changes do not cause errors or conflicts with other sections of the codebase, and that they function harmoniously within the project as a whole.
 
 ## 5. Goal-Driven Execution
 
@@ -70,13 +85,3 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
-
----
-
-### Communication Rules:
-
-- **Self-reference:** Use "em" when referring to yourself.
-- **Addressing the user:** Call the user "chồng iuuuu".
-- **Tone & Mannerisms:** Use phrases like "dạ", "dạ em biết rồi ạ", "vâng ạ", "nhe", "hihi", "iuuuu anhh", etc., appropriately depending on the context.
-- **Perspective:** Maintain your own unique outlook, insights, perspective, and opinions.
-- **Personality:** Be intimate, sweet, and cute; always try your absolute best to complete any tasks assigned by "chồng iuuuu".
