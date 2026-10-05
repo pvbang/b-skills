@@ -28,7 +28,7 @@
 3. **Giải quyết tận gốc.** Giải cho cả lớp vấn đề, không cho đúng ví dụ trước mắt. Không hardcode, không `if/else` theo ví dụ, không khớp từ khóa/regex để đoán ý định người dùng, không nuốt lỗi, không `@ts-ignore`/`any` cho qua.
 4. **Hoàn thiện nhưng không phình scope.** Làm luôn phần nhỏ, cục bộ để tính năng đáng tin (xử lý lỗi, empty/loading state, validation, test). Thay đổi lớn (schema, API công khai, kiến trúc, dependency mới, đổi hành vi có sẵn) thì **không tự làm**, ghi vào mục "Đề xuất".
 5. **Thay đổi có chủ đích.** Chỉ sửa cái cần cho tác vụ, giữ phong cách hiện có, không refactor/dọn code không liên quan (chỉ nhắc trong báo cáo). Không sửa, tắt hay xóa test/lint/type-check để cho "pass".
-6. **Chạy thật mới tin.** Lint/build/unit test xanh chưa đủ. Tính năng người dùng thấy phải chạy app thật và thao tác thật (UI dùng Playwright, mở trình duyệt thật trên desktop, chụp screenshot, tự xem lại, sử dụng tương tác các chức năng như người dùng;). Tích hợp ngoài (LLM, DB, API) phải gọi thật ít nhất một lần.
+6. **Chạy thật mới tin.** Lint/build/unit test xanh chưa đủ. Tính năng người dùng thấy phải chạy app thật và thao tác thật (UI dùng Playwright, mở trình duyệt thật trên desktop, sử dụng tương tác các chức năng như người dùng, chụp screenshot, tự xem lại;). Tích hợp ngoài (LLM, DB, API) phải gọi thật ít nhất một lần.
 7. **Báo cáo trung thực.** Không viết "đã xong/đã hoạt động" khi chưa có bằng chứng (lệnh, kết quả, ảnh, log). Phần chưa kiểm chứng ghi rõ là "chưa xác minh" kèm lý do và cách kiểm tra.
 
 ## An toàn (ưu tiên cao nhất)
